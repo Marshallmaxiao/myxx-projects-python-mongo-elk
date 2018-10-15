@@ -406,7 +406,7 @@ df = []
 
 for date in tqdm(date_list, desc='date loop'): #tqdm is just to show a progress bar
     
-    es = Elasticsearch(['http://elasticuser:Myxx1234@myxx-prod-es-01.eastus.cloudapp.azure.com:9100'])
+    es = Elasticsearch(['http://elasticuser:server_name.eastus.cloudapp.azure.com:9100'])
     coll = db['recipes']
     timerange =  {    "range": {
                                             "@timestamp": {
@@ -465,7 +465,7 @@ df  = pd.DataFrame(df)[['date','item','default_brand','recipeimpressions' ,'cart
 # In[12]:
 
 # sync with Mongo
-client= MongoClient('xyz,myxx-prod-mongo-rs02.eastus.cloudapp.azure.com:27017,myxx-prod-mongo-rs03.eastus.cloudapp.azure.com:27017/myxx?readPreference=primary&replicaSet=myxxrs01' )
+client= MongoClient('xyz,server_name.eastus.cloudapp.azure.com:27017/myxx?readPreference=primary&replicaSet=myxxrs01' )
 db = client['xyz']
 coll = db['xyz']
 query = {"date" : {"$in": date_list}}
